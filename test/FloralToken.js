@@ -11,5 +11,11 @@ contract("FloralToken test", async accounts => {
         const instance = await FloralToken.deployed();
         const balance = await instance.balanceOf(accounts[0]);
         assert.equal(balance.toNumber(), 500000);
-    })
+    });
+
+    it("should have the name Floral Token", async() => {
+        const instance = await FloralToken.deployed();
+        const name = await instance.tokenName();
+        assert.equal(name, "Floral Token")
+    });
 });
