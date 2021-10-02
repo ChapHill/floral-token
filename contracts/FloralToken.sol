@@ -3,10 +3,15 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract FloralToken {
 
-    uint public totalSupply;    //state variable
+    //state variable
+    uint public totalSupply;    
+
+    mapping(address => uint) public balanceOf;
 
     //constructor
-    constructor() public{
-        totalSupply = 100000;  //100,000
+    //set the total supply to the initial supply (in ./migrations)
+    constructor(uint _initialSupply) public{
+        balanceOf[msg.sender] = _initialSupply;
+        totalSupply = _initialSupply;
     }
 }
