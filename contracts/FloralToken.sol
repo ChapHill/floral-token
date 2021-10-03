@@ -3,11 +3,10 @@ pragma solidity >=0.4.22 <0.9.0;
 
 contract FloralToken {
 
+    //state variables
+    uint public totalSupply;   
     string public tokenName = "Floral Token";
-    string public tokenSymbol = "FLOR";
-
-    //state variable
-    uint public totalSupply;    
+    string public tokenSymbol = "FLOR"; 
 
     //must trigger when tokens are transferred
     event Transfer(address indexed _from, address indexed _to, uint _value);
