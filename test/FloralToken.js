@@ -18,4 +18,10 @@ contract("FloralToken test", async accounts => {
         const name = await instance.tokenName();
         assert.equal(name, "Floral Token")
     });
+
+    it("should transfer tokens successfully"), async() => {
+        const instance = await FloralToken.deployed();
+        const test = await instance.transfer.call(accounts[1], 999999999999);
+        assert.fail(test, "accounts does not have enough tokens")
+    }
 });
