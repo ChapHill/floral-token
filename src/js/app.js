@@ -54,6 +54,7 @@ App = {
         });
       })
   },
+  
 
   render: async function() {
       web3.eth.getCoinbase(function(error, account) {
@@ -73,9 +74,15 @@ App = {
           return floralTokenInstance.balanceOf(App.account);
       }).then(function(balance) {
           $("#tokenBalance").html("You currently have " + balance.toNumber() + " FLORS");
-      })
-      
-      
+      });
+  }, 
+
+  purchaseTokens: async function() {
+      let numberOfTokens = $("#tokensToPurchase").val();
+
+      let instance = await App.contracts.FloralTokenSale.deployed();
+      let purchase = await instance.purchaseTokens(numberOfTokens, {from: App.account, value: numberOfTokens * App.tokenPrice, gas: 500000})
+
   }
 };
 

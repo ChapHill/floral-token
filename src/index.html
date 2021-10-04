@@ -14,7 +14,7 @@
       <hr />
       <h2>The perfect cryptocurrency to give to that special someone.</h2>
       <h3 id="price"></h3>
-      <form>
+      <form onSubmit="App.purchaseTokens(); return false;">
         <input id="tokensToPurchase" type="number" name="number" value="1" min="1"></input>
         <button type="submit">Purchase Tokens</button>
       </form>
