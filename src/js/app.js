@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: "0x0",
+  tokenPrice: 150000000000000,
 
   init: async function () {
     console.log('test..');
@@ -54,15 +55,27 @@ App = {
       })
   },
 
-  render: function() {
+  render: async function() {
       web3.eth.getCoinbase(function(error, account) {
           if(error == null) {
               console.log('account', account);
-              
               App.account = account;
               $("#accountAddress").html("Your address: "  + account);
           }
+      });
+
+      let instance = await App.contracts.FloralTokenSale.deployed();
+      let price = await instance.tokenPrice();
+      $("#price").html("Current price: " + web3.fromWei(price, "ether") + " ETH");
+
+      App.contracts.FloralToken.deployed().then(function(instance) {
+          floralTokenInstance = instance;
+          return floralTokenInstance.balanceOf(App.account);
+      }).then(function(balance) {
+          $("#tokenBalance").html("You currently have " + balance.toNumber() + " FLORS");
       })
+      
+      
   }
 };
 
